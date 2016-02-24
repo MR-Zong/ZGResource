@@ -1,0 +1,43 @@
+- (void)upload {
+     NSURL *url = [NSURL URLWithString:@"http://192.168.1.106:8080/MJServer/upload"];
+      
+     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+     request.HTTPMethod = @"POST";
+    
+     // 设置请求头信息-数据类型
+     [request setValue:@"multipart/form-data; boundary=mj" forHTTPHeaderField:@"Content-Type"];
+     
+     // 拼接请求体
+     NSMutableData *data = [NSMutableData data];
+    
+     // 普通参数-username
+     // 普通参数开始的一个标记
+   [data appendData:Data(@"--mj\r\n")];
+     // 参数描述
+    [data appendData:Data(@"Content-Disposition:form-data; name=\"username\"\r\n")];
+     // 参数值
+    [data appendData:Data(@"\r\n123456\r\n")];
+    
+     
+     // 文件参数-file
+     // 文件参数开始的一个标记
+     [data appendData:Data(@"--mj\r\n")];
+     // 文件参数描述
+     [data appendData:Data(@"Content-Disposition:form-data; name=\"file\"; filename=\"img.png\"\r\n")];
+    // 文件的MINETYPE
+     [data appendData:Data(@"Content-Type:image/png\r\n")];
+    // 文件内容
+     [data appendData:Data(@"\r\n")];
+     UIImage *image = [UIImage imageNamed:@"Default.png"];
+    NSData *filedata = UIImagePNGRepresentation(image);
+     [data appendData:filedata];
+     [data appendData:Data(@"\r\n")];
+     
+     // 参数结束的标识
+    [data appendData:Data(@"--mj--")];
+     
+    // 设置请求体
+    request.HTTPBody = data;
+     
+    [[NSURLConnection connectionWithRequest:request delegate:nil] start];
+} 
