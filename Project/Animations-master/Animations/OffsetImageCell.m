@@ -42,6 +42,7 @@
     LineBackgroundView *lineBackgroundView = [LineBackgroundView createViewWithFrame:blackView.frame
                                                                            lineWidth:4 lineGap:4
                                                                            lineColor:[[UIColor blackColor] colorWithAlphaComponent:0.1f]];
+
     [self addSubview:lineBackgroundView];
     
     {

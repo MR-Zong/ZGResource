@@ -109,7 +109,7 @@
     titleView.data                    = dailyModel;
     titleView.section                 = section;
     [titleView loadContent];
-    
+
     return titleView;
 }
 
