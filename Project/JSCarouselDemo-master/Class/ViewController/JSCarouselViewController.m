@@ -11,6 +11,8 @@
 #import "JSCarouselViewModel.h"
 #import "JSCarouselUIService.h"
 
+#import "ZGLineLayout.h"
+
 @interface JSCarouselViewController ()
 
 @property (nonatomic, strong) UICollectionView    *carouselCollectionView;
@@ -67,18 +69,35 @@
     return _service;
 }
 
-- (UICollectionView *)carouselCollectionView{
-    
+//- (UICollectionView *)carouselCollectionView{
+//    
+//    if (!_carouselCollectionView) {
+//        
+//        JSCarouselLayout *layout                = [[JSCarouselLayout alloc] init];
+//        __weak typeof (self)weakSelf            = self;
+//        layout.carouselSlideIndexBlock          = ^(NSInteger index){
+//            weakSelf.indexLabel.text = [NSString stringWithFormat:@"浏览足迹(%li/%li)",index+1,_allCount];
+//        };
+//        layout.itemSize                         = CGSizeMake(190, 262);
+//        _carouselCollectionView                 = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 270)
+//                                                     collectionViewLayout:layout];
+//        _carouselCollectionView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+//        _carouselCollectionView.dataSource      = self.service;
+//        _carouselCollectionView.delegate        = self.service;
+//        _carouselCollectionView.showsHorizontalScrollIndicator = NO;
+//        _carouselCollectionView.showsVerticalScrollIndicator = NO;
+//        [_carouselCollectionView registerNib:[UINib nibWithNibName:@"JSCarouselGoodsCell" bundle:nil]
+//                  forCellWithReuseIdentifier:@"JSCarouselGoodsCell"];
+//    }
+//    return _carouselCollectionView;
+//}
+
+// ZGLineLayout
+- (UICollectionView *)carouselCollectionView
+{
     if (!_carouselCollectionView) {
-        
-        JSCarouselLayout *layout                = [[JSCarouselLayout alloc] init];
-        __weak typeof (self)weakSelf            = self;
-        layout.carouselSlideIndexBlock          = ^(NSInteger index){
-            weakSelf.indexLabel.text = [NSString stringWithFormat:@"浏览足迹(%li/%li)",index+1,_allCount];
-        };
-        layout.itemSize                         = CGSizeMake(190, 262);
-        _carouselCollectionView                 = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 270)
-                                                     collectionViewLayout:layout];
+        ZGLineLayout *lineLayout = [[ZGLineLayout alloc] init];
+        _carouselCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 270) collectionViewLayout:lineLayout];
         _carouselCollectionView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         _carouselCollectionView.dataSource      = self.service;
         _carouselCollectionView.delegate        = self.service;

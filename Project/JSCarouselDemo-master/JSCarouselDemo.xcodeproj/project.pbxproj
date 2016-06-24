@@ -25,6 +25,8 @@
 		546FD0B91D0E847700E48F49 /* pic_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 546FD0A71D0E847700E48F49 /* pic_1.jpg */; };
 		546FD0BA1D0E847700E48F49 /* pic_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 546FD0A81D0E847700E48F49 /* pic_2.jpg */; };
 		546FD0BB1D0E847700E48F49 /* pic_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 546FD0A91D0E847700E48F49 /* pic_3.jpg */; };
+		EF4F0E2F1D1BBA9800EB4049 /* ZGLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4F0E2E1D1BBA9800EB4049 /* ZGLineLayout.m */; };
+		EF4F0E321D1BDE6A00EB4049 /* ZGCycleLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4F0E311D1BDE6A00EB4049 /* ZGCycleLineLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,10 @@
 		546FD0A71D0E847700E48F49 /* pic_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic_1.jpg; sourceTree = "<group>"; };
 		546FD0A81D0E847700E48F49 /* pic_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic_2.jpg; sourceTree = "<group>"; };
 		546FD0A91D0E847700E48F49 /* pic_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic_3.jpg; sourceTree = "<group>"; };
+		EF4F0E2D1D1BBA9800EB4049 /* ZGLineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGLineLayout.h; sourceTree = "<group>"; };
+		EF4F0E2E1D1BBA9800EB4049 /* ZGLineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGLineLayout.m; sourceTree = "<group>"; };
+		EF4F0E301D1BDE6A00EB4049 /* ZGCycleLineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGCycleLineLayout.h; sourceTree = "<group>"; };
+		EF4F0E311D1BDE6A00EB4049 /* ZGCycleLineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGCycleLineLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,10 @@
 				546FD0971D0E847700E48F49 /* JSCarouselGoodsCell.xib */,
 				546FD0981D0E847700E48F49 /* JSCarouselLayout.h */,
 				546FD0991D0E847700E48F49 /* JSCarouselLayout.m */,
+				EF4F0E2D1D1BBA9800EB4049 /* ZGLineLayout.h */,
+				EF4F0E2E1D1BBA9800EB4049 /* ZGLineLayout.m */,
+				EF4F0E301D1BDE6A00EB4049 /* ZGCycleLineLayout.h */,
+				EF4F0E311D1BDE6A00EB4049 /* ZGCycleLineLayout.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -245,9 +255,11 @@
 				546FD0AA1D0E847700E48F49 /* AppDelegate.m in Sources */,
 				546FD0B11D0E847700E48F49 /* JSCarouselLayout.m in Sources */,
 				546FD0B41D0E847700E48F49 /* JSCarouselViewModel.m in Sources */,
+				EF4F0E321D1BDE6A00EB4049 /* ZGCycleLineLayout.m in Sources */,
 				546FD0B31D0E847700E48F49 /* JSCarouselUIService.m in Sources */,
 				546FD0B61D0E847700E48F49 /* main.m in Sources */,
 				546FD0AE1D0E847700E48F49 /* JSGoodsModel.m in Sources */,
+				EF4F0E2F1D1BBA9800EB4049 /* ZGLineLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

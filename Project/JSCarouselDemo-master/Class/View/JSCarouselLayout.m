@@ -46,7 +46,7 @@
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
     attributes.size = self.itemSize;
-    
+
     CGFloat cY = (self.collectionView.contentOffset.x) + _viewHeight / 2;
     CGFloat attributesY = _itemHeight * indexPath.row + _itemHeight / 2;
     attributes.zIndex = -ABS(attributesY - cY);
