@@ -10,6 +10,15 @@
 
 @implementation ZGLineLayout
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        
+    }
+    
+    return self;
+}
+
 - (void)prepareLayout
 {
     [super prepareLayout];
@@ -28,18 +37,20 @@
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSArray *array = [super layoutAttributesForElementsInRect:rect];
-    
     // 计算 CollectionView 的中点
     CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
     
+    NSMutableArray *mArray = [NSMutableArray array];
     for (UICollectionViewLayoutAttributes *attrs in array)
     {
+        UICollectionViewLayoutAttributes *attrTmp = attrs.copy;
         // 计算 cell 中点的 x 值 与 centerX 的差值
-        CGFloat delta = ABS(centerX - attrs.center.x);
+        CGFloat delta = ABS(centerX - attrTmp.center.x);
         CGFloat scale = 1 - delta / (self.collectionView.frame.size.width * 1.5);
-        attrs.transform = CGAffineTransformMakeScale(scale, scale);
+        attrTmp.transform = CGAffineTransformMakeScale(scale, scale);
+        [mArray addObject:attrTmp];
     }
-    return array;
+    return mArray.copy;
 }
 
 
