@@ -12,8 +12,9 @@
 #import "JSCarouselUIService.h"
 
 #import "ZGLineLayout.h"
+#import "ZGTanTanLayout.h"
 
-@interface JSCarouselViewController ()
+@interface JSCarouselViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView    *carouselCollectionView;
 
@@ -25,6 +26,10 @@
 
 @property (nonatomic, assign) NSInteger allCount;
 
+
+/** testTanTan */
+@property (nonatomic, strong) UICollectionView *tanCollectionView;
+
 @end
 
 @implementation JSCarouselViewController
@@ -32,6 +37,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self testTanTan];
+}
+
+- (void)testTanTan
+{
+    self.view.backgroundColor = [UIColor whiteColor];
+    ZGTanTanLayout *tanLayout = [[ZGTanTanLayout alloc] init];
+    self.tanCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64) collectionViewLayout:tanLayout];
+    self.tanCollectionView.backgroundColor = [UIColor redColor];
+    self.tanCollectionView.dataSource = self;
+    self.tanCollectionView.delegate = self;
+    [self.tanCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"tanCollectionViewCell"];
+    [self.view addSubview:self.tanCollectionView];
+}
+
+- (void)jscarouse
+{
     self.title = @"JSCarousel";
     self.view.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -47,7 +69,7 @@
     _allCount = [self.viewModel.data count];
     _indexLabel.text = [NSString stringWithFormat:@"浏览记录(1/%li)",_allCount];
     [self.view addSubview:_indexLabel];
-    
+
 }
 
 #pragma mark - lazy load
@@ -108,5 +130,27 @@
     }
     return _carouselCollectionView;
 }
+
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"tanCollectionViewCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor orangeColor];
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+
 
 @end
