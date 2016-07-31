@@ -27,22 +27,23 @@
 /**模仿uitableview的缓存回收机制*/
 - (void)layoutSubviews{
     
+//    NSLog(@"layoutSubviews");
 #pragma mark --DEBUG-- 代理中的数量已经刷新到100个了 但是layoutSubview会向CubesFrame数组索要数据 而此时Cubes中只有50个 所以一定会有数组越界异常...2015年5月27日星期三到第二天凌晨2点一直忙活了3个小时 原来还是Model层的数据结构知识不够 需要加强生命周期方法的学习:何时调用
     NSUInteger totalCount = self.CubesFrame.count;
-    for (NSUInteger i = 0; i < totalCount ; i++) {
+    for (NSUInteger i = 0; i < totalCount ; i++) { // 每次都遍历totalCount不太好
         
         CGRect rect = [self.CubesFrame[i] CGRectValue];
         
         UIWaterFallCube *cubeInView = [self.showingCubesInRect objectForKey:@(i)];
         if ([self isRectInCurrentView:rect]) {
-            if (!cubeInView) {
+            if (!cubeInView) { // 已经有view 说明已经在界面上，所以什么都不用做了
                 cubeInView = [self.dataSource waterFall:self CubeAtIndex:i];
                 cubeInView.frame = rect;
                 [self addSubview:cubeInView];
                 [self.showingCubesInRect setObject:cubeInView forKey:@(i)];
             }
         }else{
-            if(cubeInView){
+            if(cubeInView){ // 之前还在屏幕上，但现在已经离开屏幕了
                 [cubeInView removeFromSuperview];
                 [self.showingCubesInRect removeObjectForKey:@(i)];
                 [self.reusableCachePool addObject:cubeInView];//存放进缓存池
