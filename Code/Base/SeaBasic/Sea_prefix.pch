@@ -1,0 +1,312 @@
+//
+//  Sea.pch
+
+//
+
+//预编译头文件 需要在 Build Settings -> Precompile Prefix Header 设置为YES, 使用预编译头文件
+//然后 在Build Settings -> Prefix Header 设置文件的路径 SeaBasic/Sea_prefix.pch
+
+#ifndef Sea_prefix_pch
+#define Sea_prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import "SeaBasic.h"
+#import "WMInputLimitInterface.h"
+#import "WMUserInterface.h"
+#import "WMPayInterface.h"
+#import "WMGoodInterface.h"
+#import "AppDelegate.h"
+
+//图片没加载前默认背景颜色
+#define _SeaImageBackgroundColorBeforeDownload_ [UIColor colorWithRed:240.00f / 255.0f green:240.00f / 255.0f blue:240.00f / 255.0f alpha:0.5]
+
+//self的弱引用
+#define WeakSelf(parameter) typeof(self) __weak weakSelf = parameter;
+
+//比例
+#define WMDesignScale (414.0 / 1080.0)
+
+//获取模型
+#define kModelKey @"modelKey"
+//获取控制器
+#define kControllerKey @"controllerKey"
+
+#define IsEmpty(source) !(source&&source.length>0)
+#define IsNull(source) [source isKindOfClass:[NSNull class]]
+
+//http请求返回的JSON数据字段
+#define WMHttpResult @"rsp" //请求结果
+#define WMHttpSuccess @"succ" //请求成功，结果的值
+#define WMHttpData @"data" //返回的数据
+#define WMHttpMessage @"res" //结果信息
+#define WMHttpNeedLogin @"need_login" //需要登录
+#define WMHttpFail @"fail" //请求失败 结果值
+#define WMHtppErrorCode @"code" ///错误码
+
+#define WMHttpSonObject @"son_object" //获取json数据 key
+#define WMHttpJson @"json" //获取json数据 ，值
+
+#define WMHttpMethod @"method" //借口验证方法参数
+
+#define WMHttpPageIndex @"page" //翻页页码
+#define WMHttpPageIndexStartingValue 1 //翻页起始值
+#define WMHttpPageSize @"pagesize" //翻页每页数量
+#define WMHttpRequestWaiting @"请稍后.."
+#define WMHttpPageSizeGood 20 //每页商品数量
+
+#define WMHttpCustomPageSize 20//客户管理页数
+
+#define WMHttpCustomUrl @"mobileapi.member.get_members"//客户管理网址
+
+//预存款的支付ID
+#define WMDepositID @"deposit"
+//支付宝的支付ID
+#define WMMAlipayID @"malipay"
+//微信支付的支付ID
+#define WMWxPayID @"wxpayjsapi"
+
+//设置支付密码
+#define WMSetPayPassWord @"setpaypassword"
+//修改支付密码
+#define WMChangePayPassWord @"verifypaypassword"
+//购物车数量通知
+#define WMShopCarQuantity @"ShopCarQuantity"
+//购物车结算时的商品数量
+#define WMShopCheckOutGoodQuantity @"ShopCheckOutGoodQuantity"
+//购物车未选中的商品
+#define WMShopUnSelectGood @"ShopUnSelectGood"
+
+//手动回调微信支付，存储本地的key
+#define OrderID @"orderID"
+#define OrderPayCallBackURL @"OrderPayCallBackURL"
+#define OrderPaySign @"OrderPaySign"
+
+///支付的回调的类型
+typedef NS_ENUM(NSInteger, DoPayCallBackType){
+    DoPayCallBackTypeSuccess = 0, //支付成功
+    DoPayCallBackTypeFail = 1, //支付失败
+    DoPayCallBackTypeCancel = 2, //支付取消
+};
+
+///验证支付密码的回调结果
+typedef NS_ENUM(NSInteger, PayPassWordCheckResultType){
+    PayPassWordCheckResultTypeSuccess = 1, //验证成功
+    PayPassWordCheckResultTypeFail = -1, //验证失败
+    PayPassWordCheckResultTypeMoreThree = -2, //失败次数超过3次
+};
+
+
+//商品类型
+typedef NS_ENUM(NSInteger, GoodListType){
+    
+    ///免税商品
+    GoodDetailTypeDutyFree = 0,
+    
+    ///完税商品
+    GoodDetailTypeDutyPaid = 1,
+    
+    ///自营商品
+    GoodDetailTypeDutyPrincipl = 2,
+};
+
+//代客下单或选择商品
+typedef NS_ENUM(NSInteger, GoodListControllerType){
+    
+    ///代客下单
+    GoodListControllerTypeValetOrder = 1,
+    
+    ///选择商品
+    GoodListControllerTypeSelectGood = 2,
+};
+
+//订单类型
+typedef NS_ENUM(NSInteger, ConfirmOrderType){
+    
+    ///进货下单
+    ConfirmOrderTypeStock = 0,
+    
+    ///代客下单
+    ConfirmOrderTypeGeneration = 1,
+};
+
+//核实身份类型
+typedef NS_ENUM(NSInteger, VerifyIdentiType){
+    
+    ///核实旧手机
+    VerifyIdentiTypeOldPhone = 1,
+    
+    ///核实新手机并绑定
+    VerifyIdentiTypeNewPhone = 2,
+};
+
+//商品详情的头部视图类型
+typedef NS_ENUM(NSInteger, HeaderViewType){
+    
+    ///代销采购
+    HeaderViewTypeSalesPurshase = 1,
+    
+    ///加入购物车
+    HeaderViewTypeAddShopCar = 2,
+};
+
+
+
+//订单状态
+typedef NS_ENUM(NSInteger, OrderStatus){
+    
+    ///待付款
+    OrderStatusWaitPay = 0,
+    ///待发货
+    OrderStatusWaitSend = 1,
+    ///待收货
+    OrderStatusWaitReceive = 2,
+    ///已完成
+    OrderStatusFinish = 3,
+    ///退款单
+    OrderStatusMoneyBack = 4,
+    ///取消单
+    OrderStatusCancel = 5,
+};
+
+//订单状态文本
+#define WMFinishTitle @"已完成"
+#define WMWaitPayTitle @"待付款"
+#define WMWaitSendTitle @"待发货"
+#define WMWaitReceiveTitle @"待收货"
+#define WMCancelTitle @"已取消"
+#define WMRefundTitle @"退款单"
+#define WMInRefundTitle @"申请退款"
+#define WMRefundRejectTitle @"退款被拒绝"
+#define WMRefundSuccessTitle @"退款申请成功"
+
+///退款动作
+typedef NS_ENUM(NSInteger, RejectAction){
+    
+    ///同意退款
+    RejectActionAgree = 4,
+    
+    ///拒绝退款
+    RejectActionReject = 5,
+};
+
+///提现账号的类型
+typedef NS_ENUM(NSInteger, WithDrawAccountType){
+    
+    ///银行
+    WithDrawAccountTypeBlank = 1,
+    
+    //支付宝账号
+    WithDrawAccountTypeALiPay = 2,
+    
+    ///信用卡
+    WithDrawAccountTypeCreditCard = 3,
+};
+
+///订单列表的类型
+typedef NS_ENUM(NSInteger, OrderListType){
+    
+    ///销售订单
+    OrderListTypeSalesOrder = 1,
+    
+    ///进货订单
+    OrderListTypePurchaseOrder = 2,
+};
+
+/**支付的结果通知
+ */
+static NSString* const OrderDoPayCallBackResultNotification = @"OrderDoPayCallBackResultNotification";
+
+/**预存款支付成功通知
+ */
+static NSString* const DepositOrderPaySuccessNotification = @"DepositOrderPaySuccessNotification";
+
+/**商品代销成功或商品采购支付成功通知
+ */
+static NSString* const PurchaseSalesGoodSuccessNotification = @"PurchaseSalesGoodSuccessNotification";
+
+/**支付状态的key
+ */
+static NSString* const OrderDoPayStatusKey = @"OrderDoPayStatusKey";
+
+#pragma mark - 订单通知
+/**取消进货订单通知
+ */
+static NSString* const CancelPurchaseOrderNotifi = @"CancelPurchaseOrderNotifi";
+
+/**确认收货进货订单的通知
+ */
+static NSString* const ConfirmPurchaseOrderNotifi = @"ConfirmPurchaseOrderNotifi";
+
+/**关闭销售订单
+ */
+static NSString* const CloseSalesOrderNotifi = @"CloseSalesOrderNotifi";
+
+/**退款处理后的通知--成功或失败
+ */
+static NSString* const DealWithMoneyBackNotifi = @"DealWithMoneyBackNotifi";
+
+/**退款倒计时完成通知
+ */
+static NSString* const MoneyBackTimeOutNotifi = @"MoneyBackTimeOutNotifi";
+
+/**确认收货倒计时完成通知
+ */
+static NSString* const ConfirmOrderTimeOutNotifi = @"ConfirmOrderTimeOutNotifi";
+
+/**删除订单通知
+ */
+static NSString* const DeleteOrderNotifi = @"DeleteOrderNotifi";
+
+/**发货成功的通知
+ */
+static NSString* const SendGoodSuccessNotifi = @"SendGoodSuccessNotifi";
+
+/**设置支付密码成功的通知
+ */
+static NSString* const SetPayPassWordSuccessNotifi = @"SetPayPassWordSuccessNotifi";
+
+/**价格颜色
+ */
+#define WMPriceColor [UIColor colorFromHexadecimal:@"F3273F"]
+
+///价格小数
+#define WMPriceFormat @"%.2f"
+
+//系统默认的蓝色
+#define _UIKitTintColor_ [UIColor colorWithRed:0 green:0.4784314 blue:1.0 alpha:1.0]
+
+/**红色长按钮样式
+ */
+#define WMLongButtonTitleFont [UIFont fontWithName:MainFontName size:16.0] ///标题字体
+#define WMLongButtonHeight 45.0 ///按钮高度
+#define WMLongButtonMargin 15.0 ///边距
+#define WMLongButtonCornerRaidus 3.0 ///圆角
+
+
+//动画时间
+#define _animatedDuration_ 0.25
+
+//apns 推送设备token 保存在NSUserDefaults中
+#define _SeaDeviceToken_ @"SeaDeviceToken"
+
+//判断是否是3.5寸手机
+#define is3_5Inch (_height_ == 480)
+
+//判断是否是5.5寸手机
+#define is5_5Inch (_height_ == 736)
+
+//判断是否是4.0寸手机
+#define is4_0Inch (_height_ == 568 && _width_ == 320)
+
+#else
+#warning "This project is not use objc"
+#endif
+
+#endif

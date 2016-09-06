@@ -105,7 +105,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [self drawSelectedCover:rect];
+    [self drawSelectedCover:rect]; 
     [self drawTodayCircle:rect];
 }
 
